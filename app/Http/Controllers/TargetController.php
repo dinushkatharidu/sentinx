@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Target;
 use Illuminate\Http\Request;
-use Pest\Arch\ValueObjects\Targets;
 
 class TargetController extends Controller
 {

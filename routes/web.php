@@ -11,6 +11,6 @@ Route::get('/targets', [TargetController::class, 'index'])->name('targets.index'
 
 Route::get('targets/create', [TargetController::class, 'create'])->name('targets.create');
 
-Route::post('/targets', [TargetController::class, 'store'])->name('target.store');
+Route::post('/targets', [TargetController::class, 'store'])->name('targets.store');
 
 
