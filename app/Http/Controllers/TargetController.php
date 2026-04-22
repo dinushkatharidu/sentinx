@@ -28,4 +28,8 @@ class TargetController extends Controller
 
         return redirect()->route('targets.index')->with('success', 'Target added successfully!');
     }
+
+    public function show(Target $target){
+        return view('targets.show', compact('target'));
+    }
 }
