@@ -27,12 +27,20 @@
                     </tr>
                 </thead>
                 <tbody>
+
                     @foreach ($targets as $target)
                         <tr class="border-b border-gray-700 hover:bg-gray-750">
-                            <td class="p-4">{{ $target->name }}</td>
+                            <td class="p-4">
+                                <a href="{{ route('targets.show', $target->id) }}"
+                                    class="text-blue-400 hover:underline font-medium">
+                                    {{ $target->name }}
+                                </a>
+                            </td>
                             <td class="p-4">{{ $target->username ?? 'N/A' }}</td>
-                            <td class="p-4"><span
-                                    class="bg-yellow-900 text-yellow-300 px-2 py-1 rounded text-xs uppercase">{{ $target->status }}</span>
+                            <td class="p-4">
+                                <span class="bg-yellow-900 text-yellow-300 px-2 py-1 rounded text-xs uppercase">
+                                    {{ $target->status }}
+                                </span>
                             </td>
                             <td class="p-4">{{ $target->created_at->format('Y-m-d') }}</td>
                         </tr>

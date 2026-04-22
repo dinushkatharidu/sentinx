@@ -13,4 +13,5 @@ Route::get('targets/create', [TargetController::class, 'create'])->name('targets
 
 Route::post('/targets', [TargetController::class, 'store'])->name('targets.store');
 
+Route::get('/targets/{target}', [TargetController::class, 'show'])->name('targets.show');
 
