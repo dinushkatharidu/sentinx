@@ -30,18 +30,26 @@ class ActivityController extends Controller
     public function store(Request $request, Target $target)
     {
 
-       Activity::create($validated);
+        $validated = $request->validate([
+            'note' => 'required|string|max:1000',
+        ]);
+
+        $target->activities()->create([
+            'note' => $validated['note']
+        ]);
+
+        return redirect()->route('targets.show', $target->id)->with('success', 'Investigation log updated.');
 
     }
 
-    }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
     {
-        //
+
     }
 
     /**
@@ -52,7 +60,7 @@ class ActivityController extends Controller
 
     }
 
-     */
+
     public function update(Request $request, string $id)
     {
         //
@@ -66,9 +74,11 @@ class ActivityController extends Controller
         //
     }
 
-return redirect()->route('targets.show', $target->id)->with('success', 'Investigation log updated.');
+
 
 }
+
+
 
 
 
