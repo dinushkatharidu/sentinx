@@ -24,3 +24,6 @@ Route::post('/targets/{target}/activities', [ActivityController::class, 'store']
 Route::get('/targets/{target}/edit', [TargetController::class, 'edit'])->name('targets.edit');
 
 Route::put('/targets/{target}', [TargetController::class, 'update'])->name('targets.update');
+
+// delete
+Route::delete('/targets/{target}', [TargetController::class, 'destroy'])->name('targets.destroy');
