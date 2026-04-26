@@ -17,10 +17,7 @@
                         class="text-yellow-500 uppercase">{{ $target->status }}</span></p>
             </div>
 
-            <a href="{{ route('targets.index') }}"
-                class="text-gray-400 hover:text-white border border-gray-600 px-4 py-2 rounded">← Back to Records</a>
-        </div>
-        <div class="flex gap-3">
+            <div class="flex gap-3">
             <a href="{{ route('targets.edit', $target->id) }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md transition duration-200 font-semibold shadow-lg flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
@@ -36,6 +33,8 @@
                 ← Back to Records
             </a>
         </div>
+        </div>
+
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-gray-800 p-6 rounded-lg border border-gray-700 shadow-xl">
