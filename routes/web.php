@@ -17,5 +17,13 @@ Route::get('/targets/{target}', [TargetController::class, 'show'])->name('target
 
 use App\Http\Controllers\ActivityController;
 
-// Activity සේව් කරන්න අවශ්‍ය Route එක
+// For save activities
 Route::post('/targets/{target}/activities', [ActivityController::class, 'store'])->name('activities.store');
+
+// show edit form
+Route::get('/targets/{target}/edit', [TargetController::class, 'edit'])->name('targets.edit');
+
+Route::put('/targets/{target}', [TargetController::class, 'update'])->name('targets.update');
+
+// delete
+Route::delete('/targets/{target}', [TargetController::class, 'destroy'])->name('targets.destroy');
