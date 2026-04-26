@@ -51,4 +51,9 @@ class TargetController extends Controller
         return redirect()->route('targets.show', $target->id)->with('success', 'Target updated successfully!');
 
     }
+
+    public function destroy(Target $target){
+        $target->delete();
+        return redirect()->route('targets.index')->with('success', 'Target erased from records.');
+    }
 }

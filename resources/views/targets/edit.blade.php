@@ -26,4 +26,14 @@
             </div>
         </form>
     </div>
+    <div class="mt-12 border-t border-red-900 pt-6">
+    <h3 class="text-red-500 font-bold mb-2">Danger Zone</h3>
+    <form action="{{ route('targets.destroy', $target->id) }}" method="POST" onsubmit="return confirm('Are you absolutely sure? This cannot be undone.');">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="bg-red-900 hover:bg-red-700 text-white px-4 py-2 rounded text-sm transition">
+            Delete Target Permanently
+        </button>
+    </form>
+</div>
 </body>
