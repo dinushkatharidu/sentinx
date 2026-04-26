@@ -10,10 +10,33 @@
 
 <body class="bg-gray-900 text-white p-10">
     <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <h2 class="text-3xl font-bold text-blue-400">Investigation Targets</h2>
-            <a href="{{ route('targets.create') }}" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">+ New
-                Target</a>
+
+            <div class="flex flex-col md:flex-row items-center gap-4">
+                <form action="{{ route('targets.index') }}" method="GET" class="flex gap-2">
+                    <input type="text" name="search" value="{{ $search ?? '' }}"
+                        placeholder="Search by name or email..."
+                        class="bg-gray-800 border border-gray-700 px-4 py-2 rounded-lg focus:border-blue-500 outline-none text-sm w-72 text-white">
+
+                    <button type="submit"
+                        class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-bold transition text-sm">
+                        SEARCH
+                    </button>
+
+                    @if (request('search'))
+                        <a href="{{ route('targets.index') }}"
+                            class="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm flex items-center">
+                            Clear
+                        </a>
+                    @endif
+                </form>
+
+                <a href="{{ route('targets.create') }}"
+                    class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg font-bold transition text-sm whitespace-nowrap">
+                    + New Target
+                </a>
+            </div>
         </div>
 
         <div class="bg-gray-800 rounded-lg overflow-hidden border border-gray-700">

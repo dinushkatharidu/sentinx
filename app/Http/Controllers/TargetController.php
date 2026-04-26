@@ -7,8 +7,18 @@ use Illuminate\Http\Request;
 
 class TargetController extends Controller
 {
-    public function index(){
-        $targets = Target::latest()->get();
+    public function index(Request $request){
+
+        $search = $request->input('search');
+
+        $targets = Target::query()
+        ->when($search, function ($query) use ($search) {
+            return $query->where('name', 'like', '%' . $search . '%')
+            ->orWhere('email', 'like', '%' . $search . '%');
+        })
+        ->latest()
+        ->get();
+
         return view('targets.index', compact('targets'));
     }
 
