@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Target extends Model
 {
-    protected $fillable = ['name', 'username', 'email', 'notes', 'status'];
+    protected $fillable = ['name', 'username', 'email', 'notes', 'status', 'image'];
 
     public function activities()
     {
