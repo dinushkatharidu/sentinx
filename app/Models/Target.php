@@ -12,4 +12,9 @@ class Target extends Model
     {
         return $this->hasMany(Activity::class);
     }
+
+    public function evidences()
+    {
+        return $this->hasMany(Evidence::class);
+    }
 }

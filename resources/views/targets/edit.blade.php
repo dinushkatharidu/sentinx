@@ -41,6 +41,19 @@
                     class="w-full p-2 rounded bg-gray-700 border border-gray-600 outline-none text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
             </div>
 
+            <div class="mb-4 bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <label class="block text-blue-400 font-bold mb-2 uppercase text-xs tracking-widest">
+                    Upload Evidence Vault (Images/PDFs)
+                </label>
+
+                <input type="file" name="evidences[]" multiple
+                    class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+
+                <p class="text-[10px] text-gray-500 mt-2 italic">
+                    * You can select multiple files (JPG, PNG, PDF) at once.
+                </p>
+            </div>
+
             <div class="flex justify-between mt-8 border-t border-gray-700 pt-6">
                 <a href="{{ route('targets.show', $target->id) }}"
                     class="text-gray-400 hover:text-white pt-2">Cancel</a>

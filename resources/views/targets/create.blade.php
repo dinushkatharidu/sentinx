@@ -36,6 +36,18 @@
                 <input type="file" name="image"
                     class="w-full p-2 rounded bg-gray-700 border border-gray-600 outline-none text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700">
             </div>
+            <div class="mb-4 bg-gray-800 p-4 rounded-lg border border-gray-700">
+                <label class="block text-blue-400 font-bold mb-2 uppercase text-xs tracking-widest">
+                    Upload Evidence Vault (Images/PDFs)
+                </label>
+
+                <input type="file" name="evidences[]" multiple
+                    class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer">
+
+                <p class="text-[10px] text-gray-500 mt-2 italic">
+                    * You can select multiple files (JPG, PNG, PDF) at once.
+                </p>
+            </div>
             <div class="mb-4">
                 <label class="block text-sm mb-2">Initial Notes</label>
                 <textarea name="notes" class="w-full p-2 rounded bg-gray-700 border border-gray-600 outline-none"></textarea>

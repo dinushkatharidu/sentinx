@@ -27,3 +27,5 @@ Route::put('/targets/{target}', [TargetController::class, 'update'])->name('targ
 
 // delete
 Route::delete('/targets/{target}', [TargetController::class, 'destroy'])->name('targets.destroy');
+
+Route::delete('/evidence/{evidence}', [TargetController::class, 'destroyEvidence'])->name('evidence.destroy');
