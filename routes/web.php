@@ -29,3 +29,8 @@ Route::put('/targets/{target}', [TargetController::class, 'update'])->name('targ
 Route::delete('/targets/{target}', [TargetController::class, 'destroy'])->name('targets.destroy');
 
 Route::delete('/evidence/{evidence}', [TargetController::class, 'destroyEvidence'])->name('evidence.destroy');
+
+//For generate Report pdf
+Route::get('/targets/{target}/report', [TargetController::class, 'generateReport'])->name('targets.report');
+
+
