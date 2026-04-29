@@ -6,6 +6,7 @@ use App\Models\Target;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Evidence;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class TargetController extends Controller
@@ -113,5 +114,13 @@ class TargetController extends Controller
         $evidence->delete();
 
         return back()->with('success', 'Evidence removed from vault.');
+    }
+
+    public function generateReport(Target $target){
+        $target->load(['activities', 'evidences']);
+
+        $pdf = PDF::loadView('targets.report', compact('target'));
+
+        return $pdf->stream('Intelligence_Report_' . $target->id . '.pdf');
     }
 }
