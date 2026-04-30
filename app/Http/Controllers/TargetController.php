@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Models\Evidence;
 use Barryvdh\DomPDF\Facade\Pdf;
+use setasign\Fpdi\Fpdi;
+
 
 
 class TargetController extends Controller
@@ -64,7 +66,7 @@ class TargetController extends Controller
 
     public function update(Request $request, Target $target)
     {
-         $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'nullable|string|max:255',
             'email' => 'nullable|email',
@@ -116,11 +118,47 @@ class TargetController extends Controller
         return back()->with('success', 'Evidence removed from vault.');
     }
 
-    public function generateReport(Target $target){
+    public function generateReport(Target $target)
+    {
         $target->load(['activities', 'evidences']);
+        $imageData = null;
+        if ($target->image && Storage::disk('public')->exists($target->image)) {
+            $path = public_path('storage/' . $target->image);
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data = file_get_contents($path);
+            $imageData = 'data:image/' . $type . ';base64,' . base64_encode($data);
+        }
 
-        $pdf = PDF::loadView('targets.report', compact('target'));
+        $htmlPdf = Pdf::loadView('targets.report', compact('target', 'imageData'))->output();
 
-        return $pdf->stream('Intelligence_Report_' . $target->id . '.pdf');
+        $tempPath = storage_path('app/public/temp_report.pdf');
+        file_put_contents($tempPath, $htmlPdf);
+
+        $pdf = new Fpdi();
+        $pageCount  = $pdf->setSourceFile($tempPath);
+        for ($i = 1; $i <= $pageCount; $i++) {
+            $tplId = $pdf->importPage($i);
+            $pdf->addPage();
+            $pdf->useTemplate($tplId);
+        }
+
+        $evidencePdfs = $target->evidences()->where('file_type', 'pdf')->get();
+        foreach ($evidencePdfs as $evidence) {
+            $filePath = storage_path('app/public/' . $evidence->file_path);
+            if (file_exists($filePath)) {
+                $ePageCount = $pdf->setSourceFile($filePath);
+                for ($j = 1; $j <= $ePageCount; $j++) {
+                    $eTplId = $pdf->importPage($j);
+                    $pdf->addPage();
+                    $pdf->useTemplate($eTplId);
+                }
+            }
+        }
+
+        unlink($tempPath);
+
+
+        return response($pdf->Output('S'), 200)
+            ->header('Content-Type', 'application/pdf');
     }
 }
