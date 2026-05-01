@@ -122,7 +122,7 @@ class TargetController extends Controller
     {
         $target->load(['activities', 'evidences']);
 
-        
+
         $imageData = null;
         if ($target->image && Storage::disk('public')->exists($target->image)) {
             $path = public_path('storage/' . $target->image);
@@ -133,7 +133,7 @@ class TargetController extends Controller
 
 
         $qrCode = base64_encode(
-            QrCode::format('png')
+            QrCode::format('svg')
                 ->size(100)
                 ->errorCorrection('H')
                 ->generate(route('targets.show', $target->id))
