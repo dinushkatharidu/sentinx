@@ -1,40 +1,110 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Intelligence Report #{{ $target->id }}</title>
     <style>
-        body { font-family: 'DejaVu Sans', sans-serif; font-size: 12px; line-height: 1.6; color: #333; }
-        .header { text-align: center; border-bottom: 2px solid #1a365d; padding-bottom: 10px; margin-bottom: 20px; }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #1a365d;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
 
         /* Profile Section using Floats */
-        .profile-container { margin-bottom: 30px; width: 100%; }
-        .profile-photo { float: left; width: 140px; height: 140px; border: 3px solid #1a365d; margin-right: 25px; background: #f9f9f9; }
-        .profile-photo img { width: 140px; height: 140px; object-fit: cover; }
-        .profile-details { float: left; width: 400px; }
-        .clearfix { clear: both; }
+        .profile-container {
+            margin-bottom: 30px;
+            width: 100%;
+        }
 
-        .target-info { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        .target-info th, .target-info td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-        .target-info th { background-color: #f2f2f2; font-weight: bold; width: 35%; color: #1a365d; }
+        .profile-photo {
+            float: left;
+            width: 140px;
+            height: 140px;
+            border: 3px solid #1a365d;
+            margin-right: 25px;
+            background: #f9f9f9;
+        }
 
-        .log-section { margin-top: 40px; }
-        .log-table { width: 100%; border-collapse: collapse; }
-        .log-table th { background-color: #1a365d; color: white; padding: 10px; text-align: left; }
-        .log-table td { border-bottom: 1px solid #eee; padding: 10px; font-size: 11px; }
+        .profile-photo img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .profile-details {
+            float: left;
+            width: 400px;
+        }
+
+        .clearfix {
+            clear: both;
+        }
+
+        .target-info {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .target-info th,
+        .target-info td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .target-info th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+            width: 35%;
+            color: #1a365d;
+        }
+
+        .log-section {
+            margin-top: 40px;
+        }
+
+        .log-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .log-table th {
+            background-color: #1a365d;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .log-table td {
+            border-bottom: 1px solid #eee;
+            padding: 10px;
+            font-size: 11px;
+        }
     </style>
 </head>
+
 <body>
     <!-- Report Header -->
     <div class="header">
         <h1 style="margin: 0; color: #1a365d;">SENTINX INTELLIGENCE DOSSIER</h1>
-        <p style="margin: 5px 0; font-weight: bold; color: #d32f2f;">CONFIDENTIAL DOCUMENT | CASE ID: #SX-00{{ $target->id }}</p>
+        <p style="margin: 5px 0; font-weight: bold; color: #d32f2f;">CONFIDENTIAL DOCUMENT | CASE ID:
+            #SX-00{{ $target->id }}</p>
     </div>
 
     <!-- Target Profile Section -->
     <div class="profile-container">
         <div class="profile-photo">
-            @if(isset($imageData) && $imageData)
+            @if (isset($imageData) && $imageData)
                 <img src="{{ $imageData }}">
             @else
                 <div style="text-align: center; padding-top: 50px; color: #ccc;">NO PHOTO LOGGED</div>
@@ -44,9 +114,19 @@
         <div class="profile-details">
             <h2 style="margin: 0 0 10px 0; color: #1a365d; text-transform: uppercase;">{{ $target->name }}</h2>
             <table class="target-info">
-                <tr><th>IDENTIFIER</th><td>{{ $target->username ?? 'NONE' }}</td></tr>
-                <tr><th>EMAIL ADDRESS</th><td>{{ $target->email }}</td></tr>
-                <tr><th>CURRENT STATUS</th><td style="font-weight: bold; color: {{ $target->status == 'active' ? '#d32f2f' : '#f57c00' }}">{{ strtoupper($target->status) }}</td></tr>
+                <tr>
+                    <th>IDENTIFIER</th>
+                    <td>{{ $target->username ?? 'NONE' }}</td>
+                </tr>
+                <tr>
+                    <th>EMAIL ADDRESS</th>
+                    <td>{{ $target->email }}</td>
+                </tr>
+                <tr>
+                    <th>CURRENT STATUS</th>
+                    <td style="font-weight: bold; color: {{ $target->status == 'active' ? '#d32f2f' : '#f57c00' }}">
+                        {{ strtoupper($target->status) }}</td>
+                </tr>
             </table>
         </div>
         <div class="clearfix"></div>
@@ -63,19 +143,29 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($target->activities->reverse() as $activity)
-                <tr>
-                    <td style="font-weight: bold;">{{ $activity->created_at->format('Y-m-d H:i') }}</td>
-                    <td>{{ $activity->note }}</td>
-                </tr>
+                @foreach ($target->activities->reverse() as $activity)
+                    <tr>
+                        <td style="font-weight: bold;">{{ $activity->created_at->format('Y-m-d H:i') }}</td>
+                        <td>{{ $activity->note }}</td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+    <!-- QR Code Section -->
+    <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+        <div style="float: right; text-align: center;">
+            <img src="data:image/png;base64, {!! $qrCode !!}" style="width: 80px; height: 80px;">
+            <p style="font-size: 8px; margin: 0; color: #777;">SCAN TO VERIFY DIGITAL RECORD</p>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
 
     <!-- Footer -->
-    <div style="margin-top: 60px; text-align: right; font-size: 10px; color: #777; border-top: 1px solid #ccc; padding-top: 5px;">
+    <div
+        style="margin-top: 60px; text-align: right; font-size: 10px; color: #777; border-top: 1px solid #ccc; padding-top: 5px;">
         Generated by SentinX Intelligence Core on {{ now()->toDateTimeString() }}
     </div>
 </body>
+
 </html>
