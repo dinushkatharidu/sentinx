@@ -155,7 +155,7 @@
     <!-- QR Code Section -->
     <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
         <div style="float: right; text-align: center;">
-            <img src="data:image/png;base64, {!! $qrCode !!}" style="width: 80px; height: 80px;">
+            <img src="data:image/svg+xml;base64, {!! $qrCode !!}" style="width: 80px; height: 80px;">
             <p style="font-size: 8px; margin: 0; color: #777;">SCAN TO VERIFY DIGITAL RECORD</p>
         </div>
         <div style="clear: both;"></div>
