@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Evidence;
 use Barryvdh\DomPDF\Facade\Pdf;
 use setasign\Fpdi\Fpdi;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
 class TargetController extends Controller
@@ -121,6 +121,8 @@ class TargetController extends Controller
     public function generateReport(Target $target)
     {
         $target->load(['activities', 'evidences']);
+
+        
         $imageData = null;
         if ($target->image && Storage::disk('public')->exists($target->image)) {
             $path = public_path('storage/' . $target->image);
@@ -129,13 +131,22 @@ class TargetController extends Controller
             $imageData = 'data:image/' . $type . ';base64,' . base64_encode($data);
         }
 
-        $htmlPdf = Pdf::loadView('targets.report', compact('target', 'imageData'))->output();
 
+        $qrCode = base64_encode(
+            QrCode::format('png')
+                ->size(100)
+                ->errorCorrection('H')
+                ->generate(route('targets.show', $target->id))
+        );
+
+
+        $htmlPdf = Pdf::loadView('targets.report', compact('target', 'imageData', 'qrCode'))->output();
         $tempPath = storage_path('app/public/temp_report.pdf');
         file_put_contents($tempPath, $htmlPdf);
 
+
         $pdf = new Fpdi();
-        $pageCount  = $pdf->setSourceFile($tempPath);
+        $pageCount = $pdf->setSourceFile($tempPath);
         for ($i = 1; $i <= $pageCount; $i++) {
             $tplId = $pdf->importPage($i);
             $pdf->addPage();
@@ -155,8 +166,10 @@ class TargetController extends Controller
             }
         }
 
-        unlink($tempPath);
 
+        if (file_exists($tempPath)) {
+            unlink($tempPath);
+        }
 
         return response($pdf->Output('S'), 200)
             ->header('Content-Type', 'application/pdf');
