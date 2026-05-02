@@ -20,6 +20,7 @@
             <table class="w-full text-left">
                 <thead class="bg-gray-700">
                     <tr>
+                        <th class="p-4">Case ID</th>
                         <th class="p-4">Name</th>
                         <th class="p-4">Username</th>
                         <th class="p-4">Status</th>
@@ -30,6 +31,11 @@
 
                     @foreach ($targets as $target)
                         <tr class="border-b border-gray-700 hover:bg-gray-750">
+
+                            <td class="p-4 font-mono text-blue-300">
+                                {{ $target->case_id ?? 'N/A' }}
+                            </td>
+
                             <td class="p-4">
                                 <a href="{{ route('targets.show', $target->id) }}"
                                     class="text-blue-400 hover:underline font-medium">
@@ -38,9 +44,22 @@
                             </td>
                             <td class="p-4">{{ $target->username ?? 'N/A' }}</td>
                             <td class="p-4">
-                                <span class="bg-yellow-900 text-yellow-300 px-2 py-1 rounded text-xs uppercase">
-                                    {{ $target->status }}
-                                </span>
+                                @if ($target->status == 'active')
+                                    <span
+                                        class="bg-red-900 text-red-300 px-2 py-1 rounded text-[10px] font-bold uppercase border border-red-700">
+                                        ● Active
+                                    </span>
+                                @elseif($target->status == 'pending')
+                                    <span
+                                        class="bg-yellow-900 text-yellow-300 px-2 py-1 rounded text-[10px] font-bold uppercase border border-yellow-700">
+                                        ○ Pending
+                                    </span>
+                                @else
+                                    <span
+                                        class="bg-green-900 text-green-300 px-2 py-1 rounded text-[10px] font-bold uppercase border border-green-700">
+                                        ✓ Closed
+                                    </span>
+                                @endif
                             </td>
                             <td class="p-4">{{ $target->created_at->format('Y-m-d') }}</td>
                         </tr>
