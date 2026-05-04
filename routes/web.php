@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\TargetController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,4 +34,6 @@ Route::delete('/evidence/{evidence}', [TargetController::class, 'destroyEvidence
 //For generate Report pdf
 Route::get('/targets/{target}/report', [TargetController::class, 'generateReport'])->name('targets.report');
 
+//dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
