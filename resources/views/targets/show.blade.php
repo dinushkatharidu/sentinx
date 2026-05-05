@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intelligence Report - {{ $target->name }}</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@section('title', 'Intelligence Report - ' . $target->name)
 
-<body class="bg-[#0b1120] text-gray-100 p-6 md:p-10 font-sans">
+@section('content')
     <div class="max-w-6xl mx-auto">
 
         <!-- TOP HEADER: Identity & Core Actions -->
-        <div
-            class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-gray-800 pb-6 gap-4">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-gray-800 pb-6 gap-4">
             <div>
                 <h1 class="text-4xl font-black text-blue-500 tracking-tighter uppercase italic">Intelligence Report</h1>
                 <p class="text-xs font-mono text-gray-500 mt-1">
                     Target ID: <span class="text-blue-300 font-bold">#SX-00{{ $target->id }}</span> |
-                    Status: <span
-                        class="text-yellow-500 font-bold uppercase tracking-widest">{{ $target->status }}</span>
+                    Status: <span class="text-yellow-500 font-bold uppercase tracking-widest">{{ $target->status }}</span>
                 </p>
             </div>
             <div class="flex gap-2">
@@ -104,12 +96,11 @@
                     </div>
                 </div>
 
-                <!-- Investigation Log (FIXED LOGIC) -->
+                <!-- Investigation Log -->
                 <div class="bg-[#111827] p-6 rounded-lg border border-gray-800">
                     <h3 class="text-yellow-500 text-[10px] font-bold uppercase mb-4 tracking-[0.2em]">Investigation Log
                     </h3>
 
-                    <!-- FIXED: Route and Input Name match your controller -->
                     <form action="{{ route('activities.store', $target->id) }}" method="POST" class="mb-8">
                         @csrf
                         <div class="flex gap-2">
@@ -122,7 +113,6 @@
                     </form>
 
                     <div class="space-y-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
-                        <!-- FIXED: activities->reverse() to match your old code -->
                         @forelse ($target->activities->reverse() as $activity)
                             <div class="p-4 bg-[#0b1120]/60 border-l-4 border-yellow-600 rounded-r-lg">
                                 <p class="text-xs text-gray-200 leading-relaxed font-mono tracking-tight">
@@ -138,7 +128,7 @@
                     </div>
                 </div>
 
-                <!-- Evidence Vault (Modern Intelligence Style) -->
+                <!-- Evidence Vault (Individual File Logic Preserved) -->
                 <div class="bg-[#111827] p-6 rounded-lg border border-gray-800 shadow-2xl">
                     <h3 class="text-blue-400 text-[10px] font-bold uppercase mb-6 tracking-[0.2em] flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24"
@@ -173,7 +163,7 @@
                                     </p>
                                 </div>
 
-                                <!-- SLIDE-UP MODERN ACTION BAR -->
+                                <!-- SLIDE-UP MODERN ACTION BAR (User Requested - Kept Exactly Same) -->
                                 <div
                                     class="absolute inset-x-0 bottom-0 flex border-t border-gray-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-in-out">
                                     <!-- DOWNLOAD -->
@@ -213,6 +203,4 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
+@endsection
