@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Add New Target - SentinX</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@section('title', 'Add New Target')
 
-<body class="bg-gray-900 text-white p-10">
+@section('content')
+    {{-- ඔයා දීපු Form එකේ පෙනුම සහ Details ඒ විදිහටම මෙතන තියෙනවා --}}
     <div class="max-w-lg mx-auto bg-gray-800 p-8 rounded-lg shadow-lg border border-blur-500">
         <h2 class="text-2xl font-bold mb-6 text-blue-400">🕵️ Add New Investigation Target</h2>
 
@@ -57,7 +51,4 @@
 
         </form>
     </div>
-
-</body>
-
-</html>
+@endsection

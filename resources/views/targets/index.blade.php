@@ -1,73 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Target List - SentinX</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+@section('title', 'Investigation Targets')
 
-<body class="bg-gray-900 text-white p-10">
-    <div class="max-w-4xl mx-auto">
-        <div class="flex justify-between items-center mb-6">
-            <h2 class="text-3xl font-bold text-blue-400">Investigation Targets</h2>
-            <a href="{{ route('targets.create') }}" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded">+ New
-                Target</a>
+@section('content')
+<div class="max-w-6xl mx-auto">
+    <div class="flex justify-between items-center mb-8">
+        <div>
+            <h2 class="text-3xl font-black text-blue-500 tracking-tighter uppercase italic">Investigation Targets</h2>
+            <p class="text-[10px] font-mono text-gray-500 uppercase tracking-widest mt-1">Active Field Records</p>
         </div>
-
-        <div class="bg-gray-800 rounded-lg overflow-hidden border border-gray-700">
-            <table class="w-full text-left">
-                <thead class="bg-gray-700">
-                    <tr>
-                        <th class="p-4">Case ID</th>
-                        <th class="p-4">Name</th>
-                        <th class="p-4">Username</th>
-                        <th class="p-4">Status</th>
-                        <th class="p-4">Added Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach ($targets as $target)
-                        <tr class="border-b border-gray-700 hover:bg-gray-750">
-
-                            <td class="p-4 font-mono text-blue-300">
-                                {{ $target->case_id ?? 'N/A' }}
-                            </td>
-
-                            <td class="p-4">
-                                <a href="{{ route('targets.show', $target->id) }}"
-                                    class="text-blue-400 hover:underline font-medium">
-                                    {{ $target->name }}
-                                </a>
-                            </td>
-                            <td class="p-4">{{ $target->username ?? 'N/A' }}</td>
-                            <td class="p-4">
-                                @if ($target->status == 'active')
-                                    <span
-                                        class="bg-red-900 text-red-300 px-2 py-1 rounded text-[10px] font-bold uppercase border border-red-700">
-                                        ● Active
-                                    </span>
-                                @elseif($target->status == 'pending')
-                                    <span
-                                        class="bg-yellow-900 text-yellow-300 px-2 py-1 rounded text-[10px] font-bold uppercase border border-yellow-700">
-                                        ○ Pending
-                                    </span>
-                                @else
-                                    <span
-                                        class="bg-green-900 text-green-300 px-2 py-1 rounded text-[10px] font-bold uppercase border border-green-700">
-                                        ✓ Closed
-                                    </span>
-                                @endif
-                            </td>
-                            <td class="p-4">{{ $target->created_at->format('Y-m-d') }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
+        <a href="{{ route('targets.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest transition shadow-lg shadow-blue-900/20">
+            + New Target
+        </a>
     </div>
-</body>
 
-</html>
+    <div class="bg-[#111827] rounded-lg overflow-hidden border border-gray-800 shadow-2xl">
+        <table class="w-full text-left border-collapse">
+            <thead class="bg-[#0b1120] border-b border-gray-800">
+                <tr>
+                    <th class="p-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Case ID</th>
+                    <th class="p-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Name</th>
+                    <th class="p-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Username</th>
+                    <th class="p-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest">Status</th>
+                    <th class="p-4 text-[10px] font-bold text-gray-500 uppercase tracking-widest text-right">Added Date</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-800">
+                @foreach ($targets as $target)
+                    <tr class="hover:bg-blue-600/5 transition group">
+                        <td class="p-4 font-mono text-blue-400 text-xs font-bold">
+                            #SX-00{{ $target->id }}
+                        </td>
+                        <td class="p-4">
+                            <a href="{{ route('targets.show', $target->id) }}" class="text-gray-200 group-hover:text-blue-400 font-medium transition">
+                                {{ $target->name }}
+                            </a>
+                        </td>
+                        <td class="p-4 text-xs text-gray-500 italic">{{ $target->username ?? 'N/A' }}</td>
+                        <td class="p-4 text-[10px]">
+                            @if ($target->status == 'active')
+                                <span class="bg-red-900/30 text-red-500 px-2 py-1 rounded font-black uppercase border border-red-900/50">● Active</span>
+                            @elseif($target->status == 'pending')
+                                <span class="bg-yellow-900/30 text-yellow-500 px-2 py-1 rounded font-black uppercase border border-yellow-900/50">○ Pending</span>
+                            @else
+                                <span class="bg-emerald-900/30 text-emerald-500 px-2 py-1 rounded font-black uppercase border border-emerald-900/50">✓ Closed</span>
+                            @endif
+                        </td>
+                        <td class="p-4 text-xs text-gray-600 font-mono text-right">
+                            {{ $target->created_at->format('Y-m-d') }}
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection
