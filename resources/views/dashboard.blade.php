@@ -9,8 +9,23 @@
             <p class="text-xs font-mono text-emerald-500 mt-1 uppercase tracking-widest animate-pulse">System Online | Intelligence Protocol Active</p>
         </div>
         <div class="flex space-x-3">
-            <a href="{{ route('targets.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest transition shadow-lg shadow-blue-900/20">New Operation</a>
-            <a href="{{ route('targets.index') }}" class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest transition border border-gray-700">Target Records</a>
+            <a href="{{ route('reports.global-master') }}" target="_blank"
+               class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest transition shadow-lg shadow-emerald-900/20 flex items-center group">
+                <svg class="w-3.5 h-3.5 mr-2 font-black group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Master Report
+            </a>
+
+            <a href="{{ route('targets.create') }}"
+               class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest transition shadow-lg shadow-blue-900/20">
+               New Operation
+            </a>
+
+            <a href="{{ route('targets.index') }}"
+               class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-2 rounded text-xs font-bold uppercase tracking-widest transition border border-gray-700">
+               Target Records
+            </a>
         </div>
     </div>
 
@@ -78,11 +93,8 @@
                             </div>
                         </div>
                         <div class="flex items-center space-x-3 opacity-0 group-hover:opacity-100 transition">
-                            <a href="{{ route('targets.show', $activity->target->id) }}" class="text-gray-500 hover:text-blue-500 transition" title="View Target Profile">
+                            <a href="{{ route('targets.show', $activity->target->id) }}" class="text-gray-500 hover:text-blue-500 transition" title="View Profile">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                            </a>
-                            <a href="{{ route('targets.report', $activity->target->id) }}" target="_blank" class="text-emerald-600 hover:text-emerald-400 transition" title="Generate Master Dossier">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             </a>
                         </div>
                     </div>
@@ -102,10 +114,9 @@
                         <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-3 group-hover:animate-ping"></span>
                         System Integrity Scan
                     </button>
-                    <a href="{{ route('reports.global-master') }}" target="_blank" class="w-full bg-[#0b1120] border border-gray-800 p-3 rounded text-left text-[10px] font-mono hover:border-blue-500/50 hover:bg-[#111827] transition flex items-center group">
-                        <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-3 group-hover:animate-ping"></span>
-                        Generate Global Master Report
-                    </a>
+                    <div class="p-3 border border-dashed border-gray-800 rounded opacity-50">
+                        <p class="text-[8px] uppercase tracking-widest text-gray-500">Global Master Report available in Header</p>
+                    </div>
                     <button onclick="runOperation('Vault Synchronization')" class="w-full bg-[#0b1120] border border-gray-800 p-3 rounded text-left text-[10px] font-mono hover:border-purple-500/50 hover:bg-[#111827] transition flex items-center group">
                         <span class="w-1.5 h-1.5 bg-purple-500 rounded-full mr-3 group-hover:animate-ping"></span>
                         Sync Global Evidence Vault

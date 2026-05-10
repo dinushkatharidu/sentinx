@@ -175,7 +175,7 @@ class TargetController extends Controller
             ->header('Content-Type', 'application/pdf');
     }
 
-    public function generateMasterReport()
+    public function generateGlobalMasterReport()
     {
         $targets = Target::with(['activities', 'evidences'])->where('status', 'active')->get();
         $stats = [
@@ -191,7 +191,7 @@ class TargetController extends Controller
             'report_id' => 'STX-GLOBAL-' . time()
         ];
 
-        $pdf = Pdf::loadView('global_advanced_report', $data);
+        $pdf = Pdf::loadView('reports.global_advanced_report', $data);
 
         return $pdf->stream("SentinX_Global_Advanced_Report.pdf");
     }
