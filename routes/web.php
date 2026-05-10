@@ -37,3 +37,6 @@ Route::get('/targets/{target}/report', [TargetController::class, 'generateReport
 //dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+//Master Report
+// TargetController එකේ 'generateGlobalReport' method එකට මේ නම දෙමු
+Route::get('/reports/global-master', [App\Http\Controllers\TargetController::class, 'generateGlobalReport'])->name('reports.global-master');
