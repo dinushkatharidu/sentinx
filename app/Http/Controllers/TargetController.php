@@ -174,4 +174,25 @@ class TargetController extends Controller
         return response($pdf->Output('S'), 200)
             ->header('Content-Type', 'application/pdf');
     }
+
+    public function generateMasterReport()
+    {
+        $targets = Target::with(['activities', 'evidences'])->where('status', 'active')->get();
+        $stats = [
+            'total_targets' => $targets->count(),
+            'total_evidence' => \App\Models\Evidence::count(),
+            'generated_by' => 'D. Tharidu (Lead Engineer)',
+            'timestamp' => now()->format('Y-m-d H:i:s')
+        ];
+
+        $data = [
+            'targets' => $targets,
+            'stats' => $stats,
+            'report_id' => 'STX-GLOBAL-' . time()
+        ];
+
+        $pdf = Pdf::loadView('global_advanced_report', $data);
+
+        return $pdf->stream("SentinX_Global_Advanced_Report.pdf");
+    }
 }
