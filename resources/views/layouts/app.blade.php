@@ -49,7 +49,12 @@
 
         <div class="p-6 border-t border-gray-800 bg-[#0d1422] min-w-[256px]">
             <div class="flex items-center space-x-3">
-                <div class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center font-bold text-xs uppercase">DT
+                <div class="relative">
+                    <div class="w-8 h-8 rounded bg-blue-600 flex items-center justify-center font-bold text-xs uppercase shadow-lg shadow-blue-500/20">DT</div>
+                    <span class="absolute -bottom-0.5 -right-0.5 flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500 border border-[#0d1422]"></span>
+                    </span>
                 </div>
                 <div>
                     <p class="text-[10px] font-bold text-white uppercase">D. Tharidu</p>
@@ -67,9 +72,16 @@
                     <i class="fa-solid fa-bars-staggered text-xl"></i>
                 </button>
 
-                <div class="text-xs font-mono text-gray-500 hidden md:block">
-                    <span class="text-blue-500 italic">SYSTEM_STATUS:</span> ONLINE | <span
-                        class="text-emerald-500 font-bold uppercase tracking-widest">Secure Connection</span>
+                <div class="flex items-center space-x-3 text-xs font-mono text-gray-500 hidden md:flex">
+                    <div class="flex items-center space-x-2 bg-gray-900/50 px-3 py-1 rounded-full border border-gray-800">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        <span class="text-[10px] uppercase tracking-widest"><span class="text-blue-500 italic">SYSTEM:</span> ONLINE</span>
+                    </div>
+                    <span class="text-gray-700">|</span>
+                    <span class="text-emerald-500/80 font-bold uppercase tracking-widest text-[9px]">Secure Connection Established</span>
                 </div>
             </div>
 
@@ -90,7 +102,6 @@
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            // 'w-64' එක අයින් කරලා 'w-0' දැම්මම Sidebar එක මැකිලා යනවා
             if (sidebar.classList.contains('w-64')) {
                 sidebar.classList.remove('w-64');
                 sidebar.classList.add('w-0');
