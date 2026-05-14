@@ -42,3 +42,6 @@ Route::get('/reports/global-master', [App\Http\Controllers\TargetController::cla
 
 // Global Master Report
 Route::get('/reports/global-master', [App\Http\Controllers\TargetController::class, 'generateGlobalMasterReport'])->name('reports.global-master');
+
+
+Route::get('/search', [App\Http\Controllers\TargetController::class, 'search'])->name('targets.search');
