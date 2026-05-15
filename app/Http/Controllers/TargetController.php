@@ -210,7 +210,7 @@ class TargetController extends Controller
         return redirect()->route('targets.show', $results->first()->id);
     }
 
-   
+
     return view('targets.index', [
         'targets' => $results,
         'search_query' => $query
