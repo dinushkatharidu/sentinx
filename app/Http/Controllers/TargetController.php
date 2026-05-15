@@ -197,20 +197,23 @@ class TargetController extends Controller
     }
 
     public function search(Request $request)
-    {
-        $query = $request->input('query');
+{
+    $query = $request->input('query');
 
-        $results = Target::where('name', 'LIKE', "%{$query}%")
-            ->orWhere('case_id', 'LIKE', "%{$query}%")
-            ->get();
 
-        if ($results->count() === 1) {
-            return redirect()->route('targets.show', $results->first()->id);
-        }
+    $results = Target::where('name', 'LIKE', "%{$query}%")
+                     ->orWhere('case_id', 'LIKE', "%{$query}%")
+                     ->get();
 
-        return view('targets.index', [
-            'targets' => $results,
-            'search_query' => $query
-        ]);
+
+    if ($results->count() === 1) {
+        return redirect()->route('targets.show', $results->first()->id);
     }
+
+
+    return view('targets.index', [
+        'targets' => $results,
+        'search_query' => $query
+    ]);
+}
 }
