@@ -15,18 +15,28 @@
             </a>
         </div>
 
-        <div class="hidden lg:block ml-4 flex-1 max-w-xs">
-            <form action="{{ route('targets.search') }}" method="GET" class="relative group">
-                <span
-                    class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 group-hover:text-blue-500 transition">
-                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
-                </span>
-                <input type="text" name="query"
-                    class="block w-full bg-[#0d1422] border border-gray-800 rounded-full py-1.5 pl-10 pr-3 text-xs text-gray-300 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all font-mono"
-                    placeholder="SEARCH TARGET OR CASE_ID...">
+        <div class="mb-10 max-w-2xl">
+            <form action="{{ route('targets.search') }}" method="GET" class="flex gap-3 items-center group">
+                <div class="relative flex-1">
+                    <span
+                        class="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-600 group-focus-within:text-blue-500 transition-colors">
+                        <i class="fa-solid fa-terminal text-sm"></i>
+                    </span>
+
+                    <input type="text" name="query" required value="{{ request('query') }}"
+                        class="block w-full bg-[#111827]/80 border border-gray-800 rounded-lg py-4 pl-12 pr-4 text-[11px] text-gray-300 focus:outline-none focus:border-blue-500/50 focus:ring-1 focus:ring-blue-500/20 transition-all font-mono placeholder-gray-700 uppercase tracking-[0.15em] backdrop-blur-sm shadow-xl"
+                        placeholder="INITIATE_SEARCH: ENTER TARGET_NAME OR CASE_SERIAL_ID...">
+                </div>
+
+                @if (request('query'))
+                    <a href="{{ route('targets.index') }}"
+                        class="bg-red-950/30 hover:bg-red-950/50 text-red-500 border border-red-900/50 px-5 py-4 rounded-lg text-[10px] font-black uppercase tracking-[0.15em] transition-all flex items-center h-full shadow-lg shadow-red-950/20 active:scale-95 animate-fade-in">
+                        <i class="fa-solid fa-rotate-left mr-2"></i> Reset_System
+                    </a>
+                @endif
             </form>
         </div>
-        
+
         <div class="bg-[#111827] rounded-lg overflow-hidden border border-gray-800 shadow-2xl">
             <table class="w-full text-left border-collapse">
                 <thead class="bg-[#0b1120] border-b border-gray-800">

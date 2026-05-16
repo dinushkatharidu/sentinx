@@ -206,9 +206,9 @@ class TargetController extends Controller
                      ->get();
 
 
-    if ($results->count() === 1) {
-        return redirect()->route('targets.show', $results->first()->id);
-    }
+    // if ($results->count() === 1) {
+    //     return redirect()->route('targets.show', $results->first()->id);
+    // }
 
 
     return view('targets.index', [
